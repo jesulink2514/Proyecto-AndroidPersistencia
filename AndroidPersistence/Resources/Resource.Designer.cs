@@ -44,26 +44,23 @@ namespace AndroidPersistence
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040006
-			public const int Lista = 2130968582;
-			
 			// aapt resource value: 0x7f040005
-			public const int guardar = 2130968581;
-			
-			// aapt resource value: 0x7f040000
-			public const int listView1 = 2130968576;
-			
-			// aapt resource value: 0x7f040002
-			public const int nombreText = 2130968578;
+			public const int Lista = 2130968581;
 			
 			// aapt resource value: 0x7f040004
-			public const int telefonoText = 2130968580;
+			public const int guardar = 2130968580;
 			
 			// aapt resource value: 0x7f040001
-			public const int textView1 = 2130968577;
+			public const int nombreText = 2130968577;
 			
 			// aapt resource value: 0x7f040003
-			public const int textView2 = 2130968579;
+			public const int telefonoText = 2130968579;
+			
+			// aapt resource value: 0x7f040000
+			public const int textView1 = 2130968576;
+			
+			// aapt resource value: 0x7f040002
+			public const int textView2 = 2130968578;
 			
 			static Id()
 			{
@@ -79,10 +76,7 @@ namespace AndroidPersistence
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int List = 2130837504;
-			
-			// aapt resource value: 0x7f020001
-			public const int Main = 2130837505;
+			public const int Main = 2130837504;
 			
 			static Layout()
 			{
