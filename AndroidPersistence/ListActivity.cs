@@ -1,6 +1,9 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Widget;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
 
 namespace AndroidPersistence
 {
@@ -11,16 +14,18 @@ namespace AndroidPersistence
         {
             base.OnCreate(savedInstanceState);
 
-            var contacts = this.GetSharedPreferences("contactos",Android.Content.FileCreationMode.Private);
+            var basePath = Application.Context.FilesDir.AbsolutePath;
+            var filePath = Path.Combine(basePath, "contactos.json");
 
-            var name = contacts.GetString("nombre",null);
-            var telefono = contacts.GetString("telefono",null);
+            var contacts = new List<Contacto>();
 
-            var contact = new Contacto(name,telefono);
-
-            var contactList = new[] {contact};
-
-            ListAdapter = new ArrayAdapter<Contacto>(this,Android.Resource.Layout.SimpleListItem1,contactList);
+            if (File.Exists(filePath))
+            {
+                var json = File.ReadAllText(filePath);
+                contacts = JsonConvert.DeserializeObject<List<Contacto>>(json);
+            }
+            
+            ListAdapter = new ArrayAdapter<Contacto>(this,Android.Resource.Layout.SimpleListItem1, contacts);
         }
     }
 }

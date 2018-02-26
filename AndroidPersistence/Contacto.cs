@@ -2,6 +2,10 @@
 {
     public class Contacto
     {
+        public Contacto()
+        {
+        }
+
         public Contacto(string nombre,string telefono)
         {
             Nombre = nombre;

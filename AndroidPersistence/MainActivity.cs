@@ -2,6 +2,10 @@
 using Android.Widget;
 using Android.OS;
 using Android.Content;
+using System;
+using System.IO;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace AndroidPersistence
 {
@@ -25,13 +29,8 @@ namespace AndroidPersistence
                 var nombre = nombreText.Text;
                 var telf = telefonoText.Text;
 
-                var contacts = this.GetSharedPreferences("contactos",FileCreationMode.Private);
-                var edit = contacts.Edit();
-                edit.PutString("nombre",nombre);
-                edit.PutString("telefono",telf);
-                
-                edit.Commit();
-                
+                GuardarContacto(nombre,telf);
+
                 nombreText.Text = "";
                 telefonoText.Text = "";
 
@@ -46,6 +45,27 @@ namespace AndroidPersistence
                 var intent = new Intent(this,typeof(ContactListActivity));
                 StartActivity(intent);
             };
+        }
+
+        private void GuardarContacto(string nombre, string telf)
+        {
+            var contacto = new Contacto(nombre,telf);
+            
+            var basePath = Application.Context.FilesDir.AbsolutePath;
+            var filePath = Path.Combine(basePath,"contactos.json");
+
+            var contacts = new List<Contacto>();
+            if (File.Exists(filePath))
+            {
+                var contactsJson = File.ReadAllText(filePath);
+                contacts = JsonConvert.DeserializeObject<List<Contacto>>(contactsJson);
+            }
+
+            contacts.Add(contacto);
+
+            var json = JsonConvert.SerializeObject(contacts);
+        
+            File.WriteAllText(filePath,json);
         }
     }
 }
